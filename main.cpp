@@ -2,14 +2,28 @@
 
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
+
+
+//const for array size and range
 const int SIZE = 3;
+const int MIN = 10000; 
+const int MAX = 99999;
 
 class Chair {
 private:
     int legs;
     double * prices;
+
+    //function to generate random prices between 100 and 999.99 dollars
+    double randomPrice() {
+        return (rand() % (MAX-MIN + 1) + MIN) / (double) 100.0;
+    }
+
+
 public:
     // constructors
     Chair() {
