@@ -28,16 +28,41 @@ public:
     // constructors
     Chair() {
         prices = new double[SIZE];
-        legs = 0;
-        for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+        legs = (rand() % 2) +3; //random for 3 or 4 legs
+        for (int i = 0; i < SIZE; i++) {
+            prices[i] = randomPrice();
+        }
     }
-    Chair(int l) {
+
+    //parameter constructor. uses legs and prices
+    Chair(int l, const double p[SIZE]) {
         prices = new double[SIZE];
         legs = l;
-        for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+        for (int i = 0; i < SIZE; i++) {
+            prices[i] = p[i];
+        }   
     }
+    
+    //destructor
+
+    ~Chair() {
+        delete[] prices;
+    }
+
+    //assignemnt operator
+
+    Chair& operator=(const Chair& other) {
+        if (this != &other) {
+            legs = other.legs;
+            delete[] prices;
+            prices = new double[SIZE];
+            for (int i = 0; i < SIZE; i++) {
+                prices[i] = other.prices[i];
+            }
+        }
+        return *this;
+    }
+
 
     // setters and getters
     void setLegs(int l)      { legs = l; }
